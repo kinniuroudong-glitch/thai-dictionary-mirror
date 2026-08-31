@@ -191,6 +191,7 @@ button, input, select { font: inherit; }
   line-height: inherit;
   text-align: left;
   touch-action: manipulation;
+  user-select: none;
 }
 
 .thai-action:hover, .thai-action:focus-visible {
@@ -205,6 +206,50 @@ button, input, select { font: inherit; }
 
 .state-message { margin: 32px 0; color: var(--muted); font-size: 18px; }
 
+.explanation-panel {
+  position: fixed;
+  right: clamp(14px, 4vw, 56px);
+  bottom: 18px;
+  z-index: 20;
+  width: min(480px, calc(100% - 28px));
+  max-height: min(60vh, 520px);
+  overflow: auto;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 15px;
+  box-shadow: 0 14px 44px rgb(0 0 0 / 18%);
+}
+
+.explanation-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 700;
+}
+
+.close-button {
+  flex: 0 0 auto;
+  margin: -5px -3px 0 0;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.explanation-answer {
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -218,12 +263,29 @@ button, input, select { font: inherit; }
 }
 
 @media (max-width: 640px) {
-  .topbar { gap: 10px; padding: 10px 14px; }
-  .project-picker select { min-width: 94px; }
-  .entry-list { padding-right: 14px; padding-left: 14px; }
-  .entry { grid-template-columns: 48px minmax(0, 1fr); gap: 10px; padding-top: 24px; padding-bottom: 28px; }
-  .entry-number { font-size: 17px; }
-  .field { grid-template-columns: 94px minmax(0, 1fr); gap: 8px; font-size: 16px; line-height: 1.65; }
+  .topbar-shell { height: 54px; }
+  .topbar-shell-hidden { height: 10px; }
+  .topbar-shell-hidden:focus-within { height: 54px; }
+  .topbar { min-height: 54px; gap: 8px; padding: 7px 10px; }
+  .project-controls { gap: 5px; }
+  .project-picker select, .search-box input { height: 36px; }
+  .project-picker select { min-width: 78px; padding: 0 24px 0 8px; }
+  .bar-toggle { min-width: 28px; height: 28px; padding: 0 6px; }
+  .search-box { max-width: none; }
+  .search-box input { padding: 0 9px; }
+  .entry-list { padding: 4px 12px 64px; }
+  .entry { display: block; padding: 17px 2px 19px; text-align: center; }
+  .entry-number { padding: 0; margin-bottom: 5px; font-size: 13px; line-height: 1.2; text-align: center; opacity: .62; }
+  .entry-content { width: 100%; }
+  .field { display: block; margin-bottom: 7px; font-size: 16px; line-height: 1.45; }
+  .field-label { display: none; }
+  .field p { text-align: center; }
+  .field-sentence { font-size: 17px; }
+  .field-tokens { font-size: 14px; }
+  .thai-action { text-align: center; }
+  .explanation-panel { right: 10px; bottom: 10px; width: calc(100% - 20px); max-height: 42vh; padding: 10px 12px; border-radius: 10px; font-size: 13px; }
+  .explanation-head { font-size: 14px; }
+  .explanation-answer, .explanation-panel .state-message { margin-top: 8px; font-size: 13px; line-height: 1.5; }
 }
 
 @media (prefers-reduced-motion: reduce) {
