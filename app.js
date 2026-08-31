@@ -26,6 +26,9 @@ const elements = {
 
 function localizeDeepSeekError(message) {
   const normalized = String(message).toLowerCase();
+  if (window.location.hostname.endsWith('github.io')) {
+    return '镜像版暂不能调用解释，请打开原站并登录后使用 DeepSeek。';
+  }
   if (normalized.includes('deepseek_insufficient_balance') || normalized.includes('insufficient balance') || normalized.includes('insufficient quota')) {
     return 'DeepSeek 余额不足，请充值后重试。';
   }
