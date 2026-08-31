@@ -191,7 +191,7 @@ async function requestExplanation(entry, text) {
   try {
     const response = await fetch(deepSeekEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       credentials: 'include',
       body: JSON.stringify({
         text,
