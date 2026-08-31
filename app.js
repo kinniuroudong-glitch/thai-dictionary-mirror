@@ -26,13 +26,14 @@ const elements = {
 
 function localizeDeepSeekError(message) {
   const normalized = String(message).toLowerCase();
-  if (normalized.includes('insufficient balance') || normalized.includes('insufficient quota')) {
+  if (normalized.includes('deepseek_insufficient_balance') || normalized.includes('insufficient balance') || normalized.includes('insufficient quota')) {
     return 'DeepSeek 余额不足，请充值后重试。';
   }
-  if (normalized.includes('invalid api key') || normalized.includes('authentication')) {
+  if (normalized.includes('deepseek_invalid_key') || normalized.includes('invalid api key') || normalized.includes('authentication')) {
     return 'DeepSeek 密钥无效，请检查配置。';
   }
-  if (normalized.includes('rate limit')) return '请求太频繁，请稍后重试。';
+  if (normalized.includes('deepseek_rate_limit') || normalized.includes('rate limit')) return '请求太频繁，请稍后重试。';
+  if (normalized.includes('sign in') || normalized.includes('unauthorized')) return '请先在原站登录后再使用解释。';
   return 'DeepSeek 暂时无法返回中文解释，请稍后重试。';
 }
 
@@ -191,6 +192,7 @@ async function requestExplanation(entry, text) {
     const response = await fetch(deepSeekEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
         text,
         example: entry.泰语例句,
